@@ -1,6 +1,11 @@
-<div class="min-h-screen flex flex-col">
-  <bottombar/>
+<div class="min-h-screen flex flex-col dark:bg-black">
+  <div class="flex justify-around">
+    <img class="w-14 h-14" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Threads_%28app%29.png/600px-Threads_%28app%29.png" alt="">
+    <navbar class="max-w-[480px]"/>
+    <span class="text-white">burger menuy</span>
+  </div>
   <main>
     <router-outlet></router-outlet>
   </main>
+  <button (click)="toggleDarkMode()">toggle</button>
 </div>
