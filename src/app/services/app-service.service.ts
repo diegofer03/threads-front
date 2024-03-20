@@ -11,7 +11,6 @@ export class AppServiceService {
   constructor() {
     effect(() => {
       window.localStorage.setItem('darkMode', JSON.stringify(this.darkMode))
-      console.log(this.darkMode())
     })
   }
 

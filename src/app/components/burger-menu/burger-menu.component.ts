@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, HostBinding, effect, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { cssMenuRight } from '@ng-icons/css.gg'
 import {OverlayModule} from '@angular/cdk/overlay';
+import { AppServiceService } from 'src/app/services/app-service.service';
 
 @Component({
   selector: 'burger-menu',
@@ -13,6 +14,14 @@ import {OverlayModule} from '@angular/cdk/overlay';
   styleUrls: ['./burger-menu.component.scss']
 })
 export class BurgerMenuComponent {
+  private appService = inject(AppServiceService)
+  darkMode = this.appService.darkMode
 
   isOpen: boolean = false;
+
+  constructor() {
+    effect(() => {
+      console.log(this.darkMode())
+    })
+  }
 }
