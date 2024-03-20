@@ -1,5 +1,5 @@
-<div class="min-h-screen flex flex-col dark:bg-black">
-  <div class="flex justify-around">
+<div class=" flex flex-col dark:bg-black">
+  <div class="flex w-screen justify-around fixed top-0">
     <div class="h-20 flex items-center">
       <a class="w-11 flex justify-center" href="">
         <img class="transition ease-in-out delay-350 duration-400 w-8 h-8 hover:w- hover:h-[34px]" [src]="darkMode() ? '../assets/threads-white.svg' : '../assets/threads-black.svg'" alt="logo">
@@ -8,8 +8,8 @@
     <navbar class="max-w-[480px] max-h-20"/>
     <burger-menu class="max-h-20"/>
   </div>
-  <main>
+  <main class="relative top-20 dark:bg-black">
+    <button class="dark:text-white" (click)="toggleDarkMode()">toggle</button>
     <router-outlet></router-outlet>
   </main>
-  <button (click)="toggleDarkMode()">toggle</button>
 </div>
