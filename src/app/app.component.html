@@ -1,8 +1,12 @@
 <div class="min-h-screen flex flex-col dark:bg-black">
   <div class="flex justify-around">
-    <img class="w-14 h-14" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Threads_%28app%29.png/600px-Threads_%28app%29.png" alt="">
-    <navbar class="max-w-[480px]"/>
-    <span class="text-white">burger menuy</span>
+    <div class="max-h-20 flex items-center">
+      <a href="">
+        <img class="w-11 h-11" [src]="darkMode() ? '../assets/threads-white.svg' : '../assets/threads-black.svg'" alt="logo">
+      </a>
+    </div>
+    <navbar class="max-w-[480px] max-h-20"/>
+    <burger-menu class="max-h-20"/>
   </div>
   <main>
     <router-outlet></router-outlet>

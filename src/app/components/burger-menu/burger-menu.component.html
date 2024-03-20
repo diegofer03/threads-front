@@ -1,1 +1,13 @@
-<p>burger-menu works!</p>
+<div class="text-[#b8b8b8] dark:text-[#4d4d4d] flex justify-between h-full">
+  <button type="button" class="btn btn-outline-primary items-center transition ease-in-out delay-350 duration-400
+  dark:hover:text-white hover:text-black" cdkOverlayOrigin #buergerMenu = 'cdkOverlayOrigin' (click)="isOpen = !isOpen">
+    <ng-icon class="text-4xl" name="cssMenuRight"/>
+  </button>
+</div>
+<ng-template cdkConnectedOverlay [cdkConnectedOverlayOrigin]="buergerMenu" [cdkConnectedOverlayOpen]="isOpen"
+[cdkConnectedOverlayHasBackdrop]="true" (backdropClick)="isOpen = false"
+[cdkConnectedOverlayBackdropClass]="'cdk-overlay-transparent-backdrop'" (detach)="isOpen=false">
+  <div>
+    hola
+  </div>
+</ng-template>
