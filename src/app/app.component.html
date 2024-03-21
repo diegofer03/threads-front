@@ -1,12 +1,15 @@
 <div class=" flex flex-col dark:bg-black">
-  <div class="flex w-screen justify-around fixed top-0">
+  <div class="flex w-screen md:justify-around justify-between  fixed z-[1] top-0">
+    <div class="md:hidden w-11">
+      <span></span>
+    </div>
     <div class="h-20 flex items-center">
       <a class="w-11 flex justify-center" href="">
         <img class="transition ease-in-out delay-350 duration-400 w-8 h-8 hover:w- hover:h-[34px]" [src]="darkMode() ? '../assets/threads-white.svg' : '../assets/threads-black.svg'" alt="logo">
       </a>
     </div>
-    <navbar class="max-w-[480px] max-h-20"/>
-    <burger-menu class="max-h-20"/>
+    <navbar class="md:max-w-[480px] w-screen max-h-20 fixed md:relative bottom-0 z-10"/>
+    <burger-menu class="max-h-20 pr-6 md:pr-0"/>
   </div>
   <main class="relative top-20 dark:bg-black">
     <button class="dark:text-white" (click)="toggleDarkMode()">toggle</button>
