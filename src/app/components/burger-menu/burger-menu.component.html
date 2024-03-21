@@ -1,1 +1,42 @@
-<p>burger-menu works!</p>
+<div class="text-[#b8b8b8] dark:text-[#4d4d4d] flex justify-between h-full">
+  <button type="button" class="btn btn-outline-primary items-center transition ease-in-out delay-350 duration-400
+  dark:hover:text-white hover:text-black" [class.dark:hover:text-white]="darkMode()"
+  cdkOverlayOrigin #buergerMenu = 'cdkOverlayOrigin' (click)="isOpen = !isOpen">
+    <ng-icon class="text-4xl" name="cssMenuRight"/>
+  </button>
+</div>
+<ng-template cdkConnectedOverlay [cdkConnectedOverlayOrigin]="buergerMenu" [cdkConnectedOverlayOpen]="isOpen"
+[cdkConnectedOverlayHasBackdrop]="true" (backdropClick)="isOpen = false" [cdkConnectedOverlayPositions]="[
+{
+    originX: 'start',
+    originY: 'bottom',
+    overlayX: 'end',
+    overlayY: 'top',
+    offsetX: 50,
+    offsetY: -20
+}
+]"
+[cdkConnectedOverlayBackdropClass]="'cdk-overlay-transparent-backdrop'" (detach)="isOpen=false">
+  <div [class.dark]="darkMode()">
+    <div id="buergerMenu" class="font-sans text-base w-44 h-fit flex flex-col
+    justify-between font-semibold rounded-2xl dark:bg-[#181818] dark:text-white
+    shadow-lg dark:shadow-none border-t-[1px] border-gray-100 dark:border-none">
+      <a class="mx-4 mt-3 mb-3">Appereance</a>
+      <div class="border-t-[0.5px] dark:border-stone-700 border-[#b8b8b8] flex">
+        <a class=" w-full h-full mx-4 my-3 ">Settings</a>
+      </div>
+      <div class="border-t-[0.5px] dark:border-stone-700 border-[#b8b8b8] flex">
+        <a class=" w-full h-full mx-4 my-3 ">Saved</a>
+      </div>
+      <div class="border-t-[0.5px] dark:border-stone-700 border-[#b8b8b8] flex">
+        <a class=" w-full h-full mx-4 my-3 ">Your likes</a>
+      </div>
+      <div class="border-t-[0.5px] dark:border-stone-700 border-[#b8b8b8] flex">
+        <a class=" w-full h-full mx-4 my-3 ">Report a problem</a>
+      </div>
+      <div class="border-t-[0.5px] dark:border-stone-700 border-[#b8b8b8] flex">
+        <a class=" w-full h-full mx-4 my-3 ">Log out</a>
+      </div>
+    </div>
+  </div>
+</ng-template>
