@@ -18,10 +18,4 @@ export class BurgerMenuComponent {
   darkMode = this.appService.darkMode
 
   isOpen: boolean = false;
-
-  constructor() {
-    effect(() => {
-      console.log(this.darkMode())
-    })
-  }
 }
