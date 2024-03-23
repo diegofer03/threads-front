@@ -20,7 +20,7 @@ export class NavbarComponent {
 
   openCreateDialog() {
     this.dialog.open(DialogComponent, {
-      minWidth: '650px',
+      maxWidth: '650px',
 
       data: {
         animal: 'panda',

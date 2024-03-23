@@ -15,7 +15,7 @@ export class CreateThreadComponent {
 
   openCreateDialog() {
     this.dialog.open(DialogComponent, {
-      minWidth: '650px',
+      maxWidth: '650px',
 
       data: {
         animal: 'panda',
