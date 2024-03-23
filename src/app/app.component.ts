@@ -9,19 +9,19 @@ import { BurgerMenuComponent } from './components/navbar/burger-menu/burger-menu
   selector: 'app-root',
   standalone: true,
   imports: [CommonModule, RouterOutlet, NavbarComponent, BurgerMenuComponent],
-  templateUrl: './app.component.html',
+  template: `<router-outlet/>`,
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  private appService = inject(AppServiceService)
-  title = 'threads-front';
-  darkMode = this.appService.darkMode
+  // private appService = inject(AppServiceService)
+  // title = 'threads-front';
+  // darkMode = this.appService.darkMode
 
-  @HostBinding('class.dark') get mode(){
-    return this.darkMode()
-  }
+  // @HostBinding('class.dark') get mode(){
+  //   return this.darkMode()
+  // }
 
-  toggleDarkMode(){
-    this.darkMode.set(!this.darkMode())
-  }
+  // toggleDarkMode(){
+  //   this.darkMode.set(!this.darkMode())
+  // }
 }
