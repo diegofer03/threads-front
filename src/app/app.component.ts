@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { AppServiceService } from './services/app-service.service';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { BurgerMenuComponent } from './components/burger-menu/burger-menu.component';
+import { BurgerMenuComponent } from './components/navbar/burger-menu/burger-menu.component';
 
 @Component({
   selector: 'app-root',

@@ -6,14 +6,12 @@ import { Injectable, effect, signal } from '@angular/core';
 export class AppServiceService {
   darkMode = signal<boolean>(
     this.manageDarkMode()
-    // JSON.parse(window.localStorage.getItem('darkMode') ?? 'true')
   )
   setDarkMode = signal<string>('system')
 
   constructor() {
 
     effect(() => {
-      // window.localStorage.setItem('darkMode', this.darkMode()+'')
       console.log(window.matchMedia('(prefers-color-scheme: dark)').matches)
     })
   }
@@ -55,7 +53,6 @@ export class AppServiceService {
       case 'disable':
         return 'light'
       case 'enable':
-
         return 'dark';
       case 'system':
         return 'system'
