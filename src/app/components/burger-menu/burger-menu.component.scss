@@ -1,0 +1,42 @@
+input[type="radio"],input[type="checkbox"]{
+  display:none;
+  cursor: pointer;
+}
+label{
+  cursor: pointer;
+}
+.switch3
+{
+
+  position: relative;
+  height:50px;
+  display:flex;
+  justify-content:space-around;
+}
+.switch3 label{
+  padding: 1rem;
+  z-index:1;
+}
+.switch3::before{
+  content: '';
+  position: absolute;
+  left:0;
+  width: 34%;
+  height: 100%;
+  // background: #1e1e1e;
+  background: #f5f5f5;
+  border: 1px solid #b1b1b1;
+  border-radius: 12px;
+  opacity: .5;
+  transition: .5s left ease;
+}
+
+.switch3:has(#switch3-radio1:checked)::before{
+  left: 0%;
+}
+.switch3:has(#switch3-radio2:checked)::before{
+  left: 33%;
+}
+.switch3:has(#switch3-radio3:checked)::before{
+  left: 66%;
+}
