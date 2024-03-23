@@ -4,10 +4,11 @@ import { DIALOG_DATA, DialogRef} from '@angular/cdk/dialog';
 import {MatButtonModule} from '@angular/material/button';
 import { AppServiceService } from 'src/app/services/app-service.service';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { TextareaAutoresizeDirective } from 'src/app/directives/textarea-autoresize/textarea-autoresize.directive';
 @Component({
   selector: 'app-dialog',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, ReactiveFormsModule],
+  imports: [CommonModule, MatButtonModule, ReactiveFormsModule, TextareaAutoresizeDirective],
   templateUrl: './dialog.component.html',
   styleUrls: ['./dialog.component.scss']
 })
