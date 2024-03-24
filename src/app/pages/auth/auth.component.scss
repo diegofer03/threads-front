@@ -1,0 +1,11 @@
+.containerImg{
+  background: none;
+}
+
+@media (min-width: 768px) {
+  .containerImg {
+    background: url('../../../assets/log-background.webp');
+    background-repeat: no-repeat;
+    background-size: 100vw;
+  }
+}
