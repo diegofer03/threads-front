@@ -6,6 +6,8 @@ import {OverlayModule} from '@angular/cdk/overlay';
 import { AppServiceService } from 'src/app/services/app/app-service.service';
 import { heroArrowLeft, heroMoon, heroSun } from '@ng-icons/heroicons/outline';
 import { FormsModule } from '@angular/forms';
+import { SessionService } from 'src/app/services/session/session.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'burger-menu',
@@ -17,6 +19,8 @@ import { FormsModule } from '@angular/forms';
 })
 export class BurgerMenuComponent {
   private appService = inject(AppServiceService)
+  private sessionService = inject(SessionService)
+  private router = inject(Router)
   darkMode = this.appService.darkMode
   selectedTheme = this.appService.getCurrentTheme()
 
@@ -34,5 +38,10 @@ export class BurgerMenuComponent {
   changeTheme(event : any){
     const theme = event.target.value as 'light' | 'dark' | 'system'
     this.appService.setTheme(theme)
+  }
+
+  logout(){
+    this.sessionService.removeToken()
+    this.router.navigate(['/login'])
   }
 }
