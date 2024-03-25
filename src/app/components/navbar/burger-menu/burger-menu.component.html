@@ -19,7 +19,7 @@
 [cdkConnectedOverlayBackdropClass]="'cdk-overlay-transparent-backdrop'" (detach)="closeToggle()">
   <div [class.dark]="darkMode()">
     <div id="buergerMenu" [class.hidden]="showThemeOptions" [class.flex]="!showThemeOptions" class="font-sans text-base w-44 h-fit flex-col
-    justify-between font-semibold rounded-2xl dark:bg-[#181818] dark:text-white
+    justify-between font-semibold rounded-2xl dark:bg-[#181818] bg-white dark:text-white
     shadow-lg dark:shadow-none border-t-[1px] border-gray-100 dark:border-none hover:cursor-pointer">
       <a class="mx-4 mt-3 mb-3" (click)="showThemeOptions = true">Appereance</a>
       <div class="border-t-[0.5px] dark:border-stone-700 border-[#b8b8b8] flex">
@@ -40,7 +40,7 @@
     </div>
 
     <div [class.flex]="showThemeOptions" [class.hidden]="!showThemeOptions" class="font-sans text-base w-fit h-fit flex-col
-    justify-between font-semibold rounded-2xl dark:bg-[#181818] dark:text-white
+    justify-between font-semibold rounded-2xl dark:bg-[#181818] bg-white dark:text-white
     shadow-lg dark:shadow-none border-t-[1px] border-gray-100 dark:border-none">
       <div class="p-4">
         <div class="flex flex-row items-center justify-between">
