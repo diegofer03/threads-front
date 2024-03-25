@@ -1,11 +1,12 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, inject, signal } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SessionService {
-  cookieService = inject(CookieService);
+  private cookieService = inject(CookieService);
+  user = signal({})
 
   constructor() { }
 
