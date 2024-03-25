@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { cssMenuRight } from '@ng-icons/css.gg'
 import {OverlayModule} from '@angular/cdk/overlay';
-import { AppServiceService } from 'src/app/services/app-service.service';
+import { AppServiceService } from 'src/app/services/app/app-service.service';
 import { heroArrowLeft, heroMoon, heroSun } from '@ng-icons/heroicons/outline';
 import { FormsModule } from '@angular/forms';
 

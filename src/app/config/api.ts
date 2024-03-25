@@ -1,3 +1,3 @@
 export const api = {
-  api: 'https://threads-back-vxwp.onrender.com'
+  api: 'https://threads-back-vxwp.onrender.com/'
 }
