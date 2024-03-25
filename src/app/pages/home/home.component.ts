@@ -4,7 +4,7 @@ import { CreateThreadComponent } from 'src/app/components/create-thread/create-t
 import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from 'src/app/components/navbar/navbar.component';
 import { BurgerMenuComponent } from 'src/app/components/navbar/burger-menu/burger-menu.component';
-import { AppServiceService } from 'src/app/services/app-service.service';
+import { AppServiceService } from 'src/app/services/app/app-service.service';
 
 @Component({
   selector: 'app-home',

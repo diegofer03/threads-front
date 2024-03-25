@@ -1,7 +1,7 @@
 import { Component, HostBinding, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-import { AppServiceService } from './services/app-service.service';
+import { AppServiceService } from './services/app/app-service.service';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { BurgerMenuComponent } from './components/navbar/burger-menu/burger-menu.component';
 
