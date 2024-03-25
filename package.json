@@ -23,6 +23,7 @@
     "@ng-icons/core": "^27.2.0",
     "@ng-icons/css.gg": "^27.2.0",
     "@ng-icons/heroicons": "^27.2.0",
+    "ngx-cookie-service": "^16.1.0",
     "ngx-toastr": "^18.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
