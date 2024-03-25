@@ -5,11 +5,14 @@ import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angu
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Router } from '@angular/router';
+import { NgIconComponent, provideIcons } from '@ng-icons/core';
+import { faSolidSpinner } from '@ng-icons/font-awesome/solid'
 
 @Component({
   selector: 'app-auth',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, NgIconComponent],
+  viewProviders: [provideIcons({ faSolidSpinner })],
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.scss']
 })
@@ -21,6 +24,8 @@ export class AuthComponent {
   toastr = inject(ToastrService)
 
   darkMode = this.appService.darkMode
+
+  loading = false
 
   loginForm = this.formBuilder.nonNullable.group({
     user: ['', [ Validators.required]],
@@ -36,11 +41,14 @@ export class AuthComponent {
         "positionClass": "toast-bottom-center",
       });
     if(this.loginForm.valid){
+      this.loading = true
       this.authService.login(user, password).subscribe({
         next: (data) => {
+          this.loading = false
           this.router.navigate(['/home'])
         },
         error: (error) => {
+          this.loading = false
           this.toastr.error(undefined, 'Sorry, your password or user was incorrect. Please double-check.', {
             "positionClass": "toast-bottom-center",
           });

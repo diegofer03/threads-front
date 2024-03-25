@@ -6,11 +6,14 @@
     <form [formGroup]="loginForm" (ngSubmit)="login()">
       <div class="flex flex-col justify-center py-5">
         <span class="text-lg font-bold mb-5">Log in with your instagram account</span>
-        <input formControlName="user" class="bg-[#f5f5f5] p-3 focus:text-black rounded-xl text-base mb-2 text-[#a59999]
+        <input formControlName="user" class="bg-[#f5f5f5] p-3 focus:text-black rounded-xl
+         text-base mb-2 text-[#a59999]
           outline-none" placeholder="Username" type="text">
-        <input formControlName="password" class="bg-[#f5f5f5] p-3 focus:text-black rounded-xl text-base mb-2 text-[#a59999]
+        <input formControlName="password" class="bg-[#f5f5f5] p-3 focus:text-black rounded-xl
+         text-base mb-2 text-[#a59999]
           outline-none" placeholder="Passowrd" type="password" name="" id="">
-        <button class="bg-black disabled:text-[#666666] mb-4 rounded-xl text-white text-center py-5" type="submit">Log in</button>
+        <button class="bg-black disabled:text-[#666666] mb-4 rounded-xl text-white text-center
+          py-5" type="submit" [disabled]="loading" >Log in <ng-icon *ngIf="loading" class="text-white ml-1" name="faSolidSpinner"/></button>
         <a href="" class="text-center text-stone-400">Forgot your password?</a>
       </div>
     </form>
