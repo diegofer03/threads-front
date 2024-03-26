@@ -1,5 +1,6 @@
 <div class=" flex flex-col dark:bg-black">
-  <div class="flex w-screen md:justify-around justify-between md:backdrop-blur fixed z-[1] top-0">
+  <div class="flex w-screen md:justify-around justify-between md:backdrop-blur
+  dark:bg-black bg-white fixed z-[1] top-0">
     <div class="md:hidden w-11">
       <span></span>
     </div>
@@ -9,8 +10,8 @@
         [src]="darkMode() ? '../assets/threads-white.svg' : '../assets/threads-black.svg'" alt="logo">
       </a>
     </div>
-    <navbar class="md:max-w-[480px] w-screen max-h-20 fixed md:relative bottom-0 z-10"/>
-    <burger-menu class="max-h-20 pr-6 md:pr-0"/>
+    <navbar class="dark:bg-black bg-white md:max-w-[480px] w-screen max-h-20 fixed md:relative bottom-0 z-10"/>
+    <burger-menu class="dark:bg-black bg-white max-h-20 pr-6 md:pr-0"/>
   </div>
   <main class="relative top-20 dark:bg-black">
     <router-outlet></router-outlet>
