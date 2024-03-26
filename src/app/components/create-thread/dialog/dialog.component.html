@@ -10,7 +10,7 @@
       </div>
       <div class="grid grid-cols-[1fr_9fr] grid-rows-1 pt-5 md:pt-0">
         <div class="flex justify-center">
-          <img class="rounded-full w-9 h-9" [src]="'https://ui-avatars.com/api/?name=John+Doe'" alt="avatar">
+          <img class="rounded-full w-9 h-9" [src]="'https://ui-avatars.com/api/?name='+data.user.name" alt="avatar">
           <!-- <div>xd</div> -->
         </div>
         <div class="flex flex-col w-full pl-6 md:pl-0">
@@ -23,7 +23,8 @@
     <div class="flex justify-between items-center">
       <span class="">Anyone can reply</span>
       <button id="createBtn" class="dark:bg-white bg-black rounded-2xl px-4 py-1 font-sans font-semibold text-base disabled:opacity-30
-        text-white dark:text-black" type="button" [disabled]="threadContent.invalid" (click)="createThread()">Post</button>
+        text-white dark:text-black" type="button" [disabled]="threadContent.invalid || loading" (click)="createThread()">
+        Post  <ng-icon *ngIf="loading" class="animate-spin text-white dark:text-black ml-1" name="faSolidSpinner"/></button>
     </div>
   </div>
 </div>

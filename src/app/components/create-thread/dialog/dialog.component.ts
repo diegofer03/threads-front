@@ -5,17 +5,27 @@ import {MatButtonModule} from '@angular/material/button';
 import { AppServiceService } from 'src/app/services/app/app-service.service';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TextareaAutoresizeDirective } from 'src/app/directives/textarea-autoresize/textarea-autoresize.directive';
+import { User } from 'src/app/models/user.model';
+import { FeedService } from 'src/app/services/feed/feed.service';
+import { NgIconComponent, provideIcons } from '@ng-icons/core';
+import { faSolidSpinner } from '@ng-icons/font-awesome/solid'
+
 @Component({
   selector: 'app-dialog',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, ReactiveFormsModule, TextareaAutoresizeDirective],
+  imports: [CommonModule, MatButtonModule, ReactiveFormsModule, TextareaAutoresizeDirective, NgIconComponent],
+  viewProviders: [provideIcons({ faSolidSpinner })],
   templateUrl: './dialog.component.html',
   styleUrls: ['./dialog.component.scss']
 })
 export class DialogComponent {
   private appService = inject(AppServiceService)
+  private feedService = inject(FeedService)
+
   darkMode = this.appService.darkMode
-  constructor(public dialogRef: DialogRef<string>,@Inject(DIALOG_DATA) public data: any) {}
+  loading = false
+
+  constructor(public dialogRef: DialogRef<string>,@Inject(DIALOG_DATA) public data: {user: User}) {}
 
   threadContent = new FormControl('',[
     Validators.required,
@@ -23,7 +33,22 @@ export class DialogComponent {
 
   createThread(){
     if(this.threadContent.valid){
+      this.loading = true
       console.log(this.threadContent.value)
+      const payload = {
+        userId: this.data.user._id,
+        text: this.threadContent.value!
+      }
+      this.feedService.createThread(payload).subscribe({
+        next: (data) => {
+          this.loading = false
+          window.location.reload();
+        },
+        error: (error) => {
+          this.loading = false
+          console.log(error)
+        }
+      })
     }
   }
 }

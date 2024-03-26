@@ -1,13 +1,14 @@
 import { Injectable, inject, signal } from '@angular/core';
 import { JwtPayload, jwtDecode } from 'jwt-decode';
 import { CookieService } from 'ngx-cookie-service';
+import { User } from 'src/app/models/user.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SessionService {
   private cookieService = inject(CookieService);
-  user = signal({})
+  user = signal<User | null>(null)
 
   constructor() { }
 
