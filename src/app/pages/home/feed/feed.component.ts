@@ -26,6 +26,7 @@ export class FeedComponent {
     this.feedService.getAll().subscribe({
       next: (data) => {
         this.threads = data
+        this.threads.sort(this.compare)
         this.loading = false
         console.log(data)
       },
@@ -34,5 +35,15 @@ export class FeedComponent {
         console.log(error)
       }
     })
+  }
+
+  compare( a: Thread, b:Thread ) {
+    if ( a.createdAt > b.createdAt ){
+      return -1;
+    }
+    if ( a.createdAt < b.createdAt ){
+      return 1;
+    }
+    return 0;
   }
 }
