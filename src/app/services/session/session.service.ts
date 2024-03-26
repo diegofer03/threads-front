@@ -1,4 +1,5 @@
 import { Injectable, inject, signal } from '@angular/core';
+import { JwtPayload, jwtDecode } from 'jwt-decode';
 import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
@@ -22,4 +23,16 @@ export class SessionService {
     this.cookieService.delete('token')
   }
 
+  isValid(){
+    const token = this.getToken()
+    if(!token) return false
+    const decodeToken = jwtDecode<JwtPayload>(token)
+    if(decodeToken && decodeToken.exp){
+      const tokenDate = new Date(0)
+      tokenDate.setUTCSeconds(decodeToken.exp)
+      const now = new Date()
+      return tokenDate.getTime() > now.getTime()
+    }
+    return false
+  }
 }
