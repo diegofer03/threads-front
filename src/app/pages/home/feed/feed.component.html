@@ -1,7 +1,19 @@
-<div class="h-[3000px] flex flex-col items-center">
+<div class=" flex flex-col items-center">
   <div class="w-screen md:w-[620px] px-6">
-    <create-thread/>
-    <hr class="dark:bg-[#4d4d4d] bg-[#b8b8b8]  border-none h-[1px]">
-    <content-thread *ngFor="let thread of threads" [thread]="thread"/>
+    <div *ngIf="!loading">
+      <create-thread/>
+      <hr class="dark:bg-[#4d4d4d] bg-[#b8b8b8]  border-none h-[1px]">
+      <content-thread *ngFor="let thread of threads" [thread]="thread"/>
+    </div>
+    <div *ngIf="loading">
+      <div class="w-full flex py-4">
+        <ngx-skeleton-loader [theme]="{ background: '#b5b5b5'}" appearance="circle"/>
+        <div class="flex flex-col w-[90%]">
+          <ngx-skeleton-loader [theme]="{ width: '25%', background: '#b5b5b5'}"/>
+          <ngx-skeleton-loader [theme]="{ background: '#b5b5b5'}"/>
+          <ngx-skeleton-loader [theme]="{ width: '30%', background: '#b5b5b5'}"/>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

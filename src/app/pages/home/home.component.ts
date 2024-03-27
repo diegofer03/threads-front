@@ -34,7 +34,7 @@ export class HomeComponent {
     const dataToken: Token  = jwtDecode(token)
     this.authService.profile(dataToken.sub).subscribe({
       next: (data) => {
-        console.log(data)
+        this.sessionService.user.set(data)
       },
       error: (error) => {
         console.log(error)

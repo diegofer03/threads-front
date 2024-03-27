@@ -10,3 +10,9 @@ export interface Thread {
   updatedAt: string,
   likes: number
 }
+
+export interface createThread{
+  text: string,
+  userId: string,
+  parentId?: string
+}
