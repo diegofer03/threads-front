@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs';
 import { SessionService } from '../session/session.service';
 import { Login } from 'src/app/models/auth.model';
-import { User } from 'src/app/models/user.model';
+import { User, UserUpdate } from 'src/app/models/user.model';
 @Injectable({
   providedIn: 'root'
 })
@@ -30,6 +30,10 @@ export class AuthService {
 
   profile(id: string){
     return this.http.get<User>(`${this.api}users/${id}`)
+  }
+
+  updateProfile(id: string, payload: UserUpdate){
+    return this.http.patch(`${api.api}users/${id}`, payload)
   }
 
   logout(){
