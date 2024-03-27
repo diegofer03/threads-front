@@ -1,6 +1,6 @@
 <div class="h-screen flex flex-col dark:bg-black">
   <div class="flex w-screen md:justify-around justify-between md:backdrop-blur
-  dark:bg-black bg-white fixed z-[1] top-0">
+  dark:bg-black bg-white fixed z-[2] top-0">
     <div class="md:hidden w-11">
       <span></span>
     </div>
@@ -15,5 +15,7 @@
   </div>
   <main class="relative top-20 dark:bg-black">
     <router-outlet></router-outlet>
+    <div class="h-20 md:hidden">
+    </div>
   </main>
 </div>
