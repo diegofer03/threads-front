@@ -1,1 +1,23 @@
-<p>profile works!</p>
+<div class=" flex flex-col items-center">
+  <div class="w-screen md:w-[620px] md:px-6 dark:text-white font-sans pt-4">
+    <div class="flex justify-between px-6 md:px-0">
+      <div class="flex flex-col">
+        <span class="font-bold text-2xl">{{user?.name}}</span>
+        <span class="font-light">{{user?.userName}}</span>
+      </div>
+      <div>
+        <img class="rounded-full" [src]="'https://ui-avatars.com/api/?name='+user?.name" alt="">
+      </div>
+    </div>
+    <div class="px-6 md:px-0">
+      <button (click)="openCreateDialog()" class="w-full text-base font-semibold border rounded-xl py-1 my-8">Edit profile</button>
+    </div>
+    <div [class.dark]="darkMode()" [class.light]="!darkMode()">
+      <mat-tab-group>
+        <mat-tab  label="Threads"  > Content 1 </mat-tab>
+        <mat-tab label="Replys"> Content 2 </mat-tab>
+        <mat-tab label="Reposts"> Content 3 </mat-tab>
+      </mat-tab-group>
+    </div>
+  </div>
+</div>
