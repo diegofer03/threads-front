@@ -1,4 +1,4 @@
-import { Component, effect, inject } from '@angular/core';
+import { Component, Input, effect, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SessionService } from 'src/app/services/session/session.service';
 import {MatTabsModule} from '@angular/material/tabs';
@@ -7,6 +7,8 @@ import {Dialog, DialogModule} from '@angular/cdk/dialog';
 import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
 import { Title } from '@angular/platform-browser';
 import { ContentThreadComponent } from 'src/app/components/content-thread/content-thread.component';
+import { User } from 'src/app/models/user.model';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -19,9 +21,15 @@ export class ProfileComponent {
   private sessionService = inject(SessionService)
   private appService = inject(AppServiceService)
   private titleService = inject(Title)
+  private route = inject(ActivatedRoute)
+  private router = inject(Router)
+  userName : string | null
+  otherUserFlag = false
+
+  @Input() profileUser? : User
 
   darkMode = this.appService.darkMode
-  user = this.sessionService.user
+  user = signal(this.sessionService.user())
 
   contentMock = {
     "_id": "6602ffddcfcc5ab028cf6b15",
@@ -41,10 +49,32 @@ export class ProfileComponent {
 }
 
   constructor(public dialog: Dialog){
+    this.userName = this.route.snapshot.paramMap.get('id')
     effect(() =>{
       if(this.user())
         this.titleService.setTitle(`${this.user()?.name} (@${this.user()?.userName})`)
     })
+  }
+
+  ngOnInit(){
+    this.router.events.subscribe((val) => {
+      // see also
+      this.userName = this.route.snapshot.paramMap.get('id')
+      this.user.update((user) => {return { ...user, _id: user!._id,
+        name: user!.name,
+        email: user!.email,
+        userName: this.userName as string, }})
+      console.log(this.userName)
+      console.log(val)
+    });
+    if(this.userName){
+      if(this.userName !== this.user()?.userName){
+        this.otherUserFlag = true
+        console.log('Replace data')
+      }
+    }else{
+      this.router.navigate(['/home'])
+    }
   }
 
   openCreateDialog() {
@@ -55,5 +85,9 @@ export class ProfileComponent {
         user: this.user(),
       },
     });
+  }
+
+  getUserData(){
+
   }
 }

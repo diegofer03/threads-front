@@ -5,11 +5,12 @@ import { heroMagnifyingGlass } from '@ng-icons/heroicons/outline'
 import { FeedService } from 'src/app/services/feed/feed.service';
 import { User } from 'src/app/models/user.model';
 import { faSolidSpinner } from '@ng-icons/font-awesome/solid'
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-search',
   standalone: true,
-  imports: [CommonModule, NgIconComponent],
+  imports: [CommonModule, NgIconComponent, RouterLink],
   viewProviders: [provideIcons({ heroMagnifyingGlass, faSolidSpinner })],
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss']

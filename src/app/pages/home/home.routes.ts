@@ -7,7 +7,7 @@ export default [
     title: 'Threads'
   },
   {
-    path: 'profile',
+    path: 'profile/:id',
     loadComponent: () => import('./profile/profile.component').then(p => p.ProfileComponent),
     title: 'Profile'
   },
