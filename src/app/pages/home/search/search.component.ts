@@ -19,10 +19,20 @@ export class SearchComponent {
   private feedService = inject(FeedService)
   users: User[] = []
   loading =  false
+  search = ''
 
   ngOnInit(){
+    this.getUsers()
+  }
+
+  searchUser(event: Event){
+    const user = (event.target as HTMLInputElement).value
+    this.getUsers(user)
+  }
+
+  getUsers(user: string = ''){
     this.loading = true
-    this.feedService.getUsers().subscribe({
+    this.feedService.getUserByUsername({userName: user}).subscribe({
       next: (data) => {
         this.users = data
         this.loading = false

@@ -11,11 +11,14 @@ import { User } from 'src/app/models/user.model';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { FeedService } from 'src/app/services/feed/feed.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { NgIconComponent, provideIcons } from '@ng-icons/core';
+import { faSolidSpinner } from '@ng-icons/font-awesome/solid'
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [CommonModule, MatTabsModule, DialogModule, ContentThreadComponent],
+  imports: [CommonModule, MatTabsModule, DialogModule, ContentThreadComponent, NgIconComponent],
+  viewProviders: [provideIcons({ faSolidSpinner })],
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
@@ -34,6 +37,7 @@ export class ProfileComponent {
 
   darkMode = this.appService.darkMode
   user = signal<User | null>(null)
+  loading = false
 
   contentMock = {
     "_id": "6602ffddcfcc5ab028cf6b15",
@@ -74,17 +78,19 @@ export class ProfileComponent {
         if(this.userName){
           if(this.userName !== this.userSession()?.userName){
             this.otherUserFlag = false
+            this.loading = true
             this.feedService.getUserByUsername({userName: this.userName!}).subscribe({
               next: (data) => {
                 this.user.update((user) => {return { ...user, _id: data[0]._id,
                   name: data[0].name,
                   email: data[0].email,
                   userName: data[0].userName, }})
-
+                  this.loading = false
 
               },
               error: (error) => {
                 console.log(error)
+                this.loading = false
               }
             })
           }else{
@@ -108,11 +114,14 @@ export class ProfileComponent {
   }
 
   getUserData(){
+    this.loading = true
     this.feedService.getUserByUsername({userName: this.userName!}).subscribe({
       next: (data) => {
         this.user.set(data[0])
+        this.loading = false
       },
       error: (error) => {
+        this.loading = false
         console.log(error)
       }
     })

@@ -3,7 +3,7 @@
     <div class="w-full flex items-center rounded-2xl border border-black p-5 mb-4 dark:text-[#4d4d4d] text-[#b8b8b8]
     dark:bg-black dark:border-[#4d4d4d]">
       <ng-icon class="text-lg" name="heroMagnifyingGlass"/>
-      <input class="w-full dark:bg-black ml-3 text-base outline-none" placeholder='Search'  type="text">
+      <input class="w-full dark:bg-black ml-3 text-base focus:dark:text-white focus:text-black outline-none" placeholder='Search' [value]="search" (keyup)="searchUser($event)" type="text">
     </div>
     <div *ngIf="!loading">
       <div class="grid grid-cols-[1fr_9fr] grid-rows-1 py-5 md:py-4 dark:text-white" *ngFor="let user of users">
@@ -23,9 +23,12 @@
           </span>  -->
         </div>
       </div>
+      <div *ngIf="users.length === 0" class="w-full text-center text-base mt-20">
+        <span>User not found.</span>
+      </div>
     </div>
     <div *ngIf="loading" class="text-center text-xl h-[300px] flex justify-center items-center">
-      <ng-icon class="animate-spin text-white ml-1" name="faSolidSpinner"/>
+      <ng-icon class="animate-spin dark:text-white ml-1" name="faSolidSpinner"/>
     </div>
   </div>
 </div>
