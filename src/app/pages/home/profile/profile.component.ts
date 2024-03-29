@@ -8,7 +8,9 @@ import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
 import { Title } from '@angular/platform-browser';
 import { ContentThreadComponent } from 'src/app/components/content-thread/content-thread.component';
 import { User } from 'src/app/models/user.model';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { FeedService } from 'src/app/services/feed/feed.service';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-profile',
@@ -19,17 +21,19 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ProfileComponent {
   private sessionService = inject(SessionService)
+  private authService = inject(AuthService)
+  private feedService = inject(FeedService)
   private appService = inject(AppServiceService)
   private titleService = inject(Title)
   private route = inject(ActivatedRoute)
   private router = inject(Router)
   userName : string | null
-  otherUserFlag = false
-
+  otherUserFlag = true
+  userSession = this.sessionService.user
   @Input() profileUser? : User
 
   darkMode = this.appService.darkMode
-  user = signal(this.sessionService.user())
+  user = signal<User | null>(null)
 
   contentMock = {
     "_id": "6602ffddcfcc5ab028cf6b15",
@@ -54,27 +58,43 @@ export class ProfileComponent {
       if(this.user())
         this.titleService.setTitle(`${this.user()?.name} (@${this.user()?.userName})`)
     })
+    effect(() => {
+      if(this.userName !== this.userSession()?.userName) this.otherUserFlag = false
+      else this.otherUserFlag = true
+    })
   }
 
   ngOnInit(){
+    this.getUserData()
     this.router.events.subscribe((val) => {
       // see also
-      this.userName = this.route.snapshot.paramMap.get('id')
-      this.user.update((user) => {return { ...user, _id: user!._id,
-        name: user!.name,
-        email: user!.email,
-        userName: this.userName as string, }})
-      console.log(this.userName)
-      console.log(val)
-    });
-    if(this.userName){
-      if(this.userName !== this.user()?.userName){
-        this.otherUserFlag = true
-        console.log('Replace data')
+      this.otherUserFlag = true
+      if(val instanceof NavigationEnd){
+        this.userName = this.route.snapshot.paramMap.get('id')
+        if(this.userName){
+          if(this.userName !== this.userSession()?.userName){
+            this.otherUserFlag = false
+            this.feedService.getUserByUsername({userName: this.userName!}).subscribe({
+              next: (data) => {
+                this.user.update((user) => {return { ...user, _id: data[0]._id,
+                  name: data[0].name,
+                  email: data[0].email,
+                  userName: data[0].userName, }})
+
+
+              },
+              error: (error) => {
+                console.log(error)
+              }
+            })
+          }else{
+            this.user.set(this.userSession())
+          }
+        }else{
+          this.router.navigate(['/home'])
+        }
       }
-    }else{
-      this.router.navigate(['/home'])
-    }
+    });
   }
 
   openCreateDialog() {
@@ -88,6 +108,13 @@ export class ProfileComponent {
   }
 
   getUserData(){
-
+    this.feedService.getUserByUsername({userName: this.userName!}).subscribe({
+      next: (data) => {
+        this.user.set(data[0])
+      },
+      error: (error) => {
+        console.log(error)
+      }
+    })
   }
 }

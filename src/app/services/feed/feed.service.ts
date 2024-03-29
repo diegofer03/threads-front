@@ -24,4 +24,8 @@ export class FeedService {
   getUsers(){
     return this.http.get<User[]>(`${this.api}users`)
   }
+
+  getUserByUsername(payload: { userName: string }){
+    return this.http.post<User[]>(`${this.api}users/getByUsername`, payload)
+  }
 }
