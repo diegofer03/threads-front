@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { Thread } from 'src/app/models/threads-content.model';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { heroEllipsisHorizontalMini } from '@ng-icons/heroicons/mini'
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'content-thread',
   standalone: true,
-  imports: [CommonModule, NgIconComponent],
+  imports: [CommonModule, NgIconComponent, RouterLink],
   templateUrl: './content-thread.component.html',
   viewProviders: [provideIcons({ heroEllipsisHorizontalMini })],
   styleUrls: ['./content-thread.component.scss']
