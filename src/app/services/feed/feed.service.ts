@@ -28,4 +28,12 @@ export class FeedService {
   getUserByUsername(payload: { userName: string }){
     return this.http.post<User[]>(`${this.api}users/getByUsername`, payload)
   }
+
+  getTopByUserId(id: string){
+    return this.http.get<Thread[]>(`${this.api}comments/getTopByUserId/${id}`)
+  }
+
+  getRepliesByUserId(id: string){
+    return this.http.get<Thread[]>(`${this.api}comments/getRepliesByUserId/${id}`)
+  }
 }

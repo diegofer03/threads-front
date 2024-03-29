@@ -13,6 +13,7 @@ import { FeedService } from 'src/app/services/feed/feed.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { faSolidSpinner } from '@ng-icons/font-awesome/solid'
+import { Thread } from 'src/app/models/threads-content.model';
 
 @Component({
   selector: 'app-profile',
@@ -38,6 +39,8 @@ export class ProfileComponent {
   darkMode = this.appService.darkMode
   user = signal<User | null>(null)
   loading = false
+  threads: Thread[] = []
+  replies: Thread[] = []
 
   contentMock = {
     "_id": "6602ffddcfcc5ab028cf6b15",
@@ -86,7 +89,8 @@ export class ProfileComponent {
                   email: data[0].email,
                   userName: data[0].userName, }})
                   this.loading = false
-
+                this.getTopThreads()
+                this.getRepliesThreads()
               },
               error: (error) => {
                 console.log(error)
@@ -95,6 +99,8 @@ export class ProfileComponent {
             })
           }else{
             this.user.set(this.userSession())
+            this.getTopThreads()
+            this.getRepliesThreads()
           }
         }else{
           this.router.navigate(['/home'])
@@ -118,6 +124,36 @@ export class ProfileComponent {
     this.feedService.getUserByUsername({userName: this.userName!}).subscribe({
       next: (data) => {
         this.user.set(data[0])
+        this.loading = false
+        this.getTopThreads()
+        this.getRepliesThreads()
+      },
+      error: (error) => {
+        this.loading = false
+        console.log(error)
+      }
+    })
+  }
+
+  getTopThreads(){
+    this.loading = true
+    this.feedService.getTopByUserId(this.user()!._id).subscribe({
+      next: (data) => {
+        this.threads = data
+        this.loading = false
+      },
+      error: (error) => {
+        this.loading = false
+        console.log(error)
+      }
+    })
+  }
+
+  getRepliesThreads(){
+    this.loading = true
+    this.feedService.getRepliesByUserId(this.user()!._id).subscribe({
+      next: (data) => {
+        this.replies = data
         this.loading = false
       },
       error: (error) => {

@@ -17,12 +17,14 @@
         <mat-tab-group dynamicHeight="true">
           <mat-tab label="Threads">
             <div class="px-2">
-              <content-thread [thread]="contentMock"/><content-thread [thread]="contentMock"/>
-              <content-thread [thread]="contentMock"/><content-thread [thread]="contentMock"/><content-thread [thread]="contentMock"/>
+              <content-thread *ngFor="let thread of threads" [thread]="thread"/>
             </div>
           </mat-tab>
           <mat-tab label="Replies">
-            <div class="w-full text-center pt-14 text-base">
+            <div *ngIf="replies.length > 0" class="px-2">
+              <content-thread *ngFor="let replie of replies" [thread]="replie"/>
+            </div>
+            <div *ngIf="replies.length === 0" class="w-full text-center pt-14 text-base">
               <span>No replies yet.</span>
             </div>
           </mat-tab>

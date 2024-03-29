@@ -20,6 +20,7 @@ export class FeedComponent {
   private feedService = inject(FeedService)
   threads: Thread[] = []
   loading = false
+  skeleton_times = [1,2,3,4,5];
 
   ngOnInit(){
     this.loading = true
