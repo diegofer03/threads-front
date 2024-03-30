@@ -17,6 +17,14 @@
       <span class="font-light align-middle">
         {{thread?.text}}
       </span>
+      <div class="flex text-2xl pt-2">
+        <div class="dark:hover:bg-stone-700 p-1 flex justify-center items-center hover:rounded-full">
+          <ng-icon class="hover:cursor-pointer" name="faHeart"/>
+        </div>
+        <div class="dark:hover:bg-stone-700 p-1 flex justify-center items-center hover:rounded-full ml-3">
+          <ng-icon (click)="openReplyDialog()" class=" hover:cursor-pointer  dark:hover:bg-stone-700" name="faComment"/>
+        </div>
+      </div>
     </div>
   </div>
   <hr class="dark:bg-[#4d4d4d] bg-[#b8b8b8] border-none h-[1px]">
