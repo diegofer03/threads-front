@@ -22,7 +22,51 @@
           </mat-tab>
           <mat-tab label="Replies">
             <div *ngIf="replies.length > 0" class="px-2">
-              <content-thread *ngFor="let replie of replies" [thread]="replie"/>
+              <!-- <content-thread *ngFor="let replie of replies" [thread]="replie"/> -->
+              <div *ngFor="let replie of replies">
+                <div class="grid grid-cols-[1fr_9fr] grid-rows-1 py-5 md:py-4 dark:text-white ">
+                  <div>
+                    <a [routerLink]="['/profile', replie.parent.user.userName]">
+                      <img class="rounded-full w-9 h-9" [src]="'https://ui-avatars.com/api/?name='+replie.parent.user.name" alt="avatar">
+                    </a>
+                  </div>
+                  <div class="md:w-full sm:w-[91%] pl-4 sm:pl-0">
+                    <div class="flex justify-between">
+                      <a [routerLink]="['/profile', replie.parent.user.userName]" class="hover:underline">{{replie.parent.user.userName}}</a>
+
+                      <div class="flex items-center">
+                        <span class="dark:text-stone-500 text-[#b8b8b8]">{{timeSince(replie.parent.createdAt)}}</span>
+                        <ng-icon class="ml-4" name="heroEllipsisHorizontalMini"/>
+                      </div>
+                    </div>
+                    <span class="font-light align-middle">
+                      {{replie.parent.text}}
+                    </span>
+                  </div>
+                </div>
+                <div class="grid grid-cols-[1fr_9fr] grid-rows-1 py-5 md:pt-0">
+                  <div class="flex justify-start">
+                    <img class="rounded-full w-9 h-9"
+                    [src]="'https://ui-avatars.com/api/?name='+replie.user.name"
+                    alt="avatar">
+                    <!-- <div>xd</div> -->
+                  </div>
+                  <div class="flex flex-col w-full pl-6 md:pl-0">
+                    <div class="flex justify-between">
+                      <a [routerLink]="['/profile', replie.user.userName]" class="hover:underline text-base font-medium dark:text-white">{{replie.user.userName}}</a>
+
+                      <div class="flex items-center">
+                        <span class="dark:text-stone-500 text-[#b8b8b8]">{{timeSince(replie.createdAt)}}</span>
+                        <ng-icon class="ml-4" name="heroEllipsisHorizontalMini"/>
+                      </div>
+                    </div>
+                    <span class="font-light align-middle dark:text-white text-black">
+                      {{replie.text}}
+                    </span>
+                  </div>
+                </div>
+                <hr class="dark:bg-[#4d4d4d] bg-[#b8b8b8] border-none h-[1px]">
+              </div>
             </div>
             <div *ngIf="replies.length === 0" class="w-full text-center pt-14 text-base">
               <span>No replies yet.</span>

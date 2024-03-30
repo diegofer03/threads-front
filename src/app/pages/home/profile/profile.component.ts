@@ -8,18 +8,19 @@ import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
 import { Title } from '@angular/platform-browser';
 import { ContentThreadComponent } from 'src/app/components/content-thread/content-thread.component';
 import { User } from 'src/app/models/user.model';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router, RouterLink } from '@angular/router';
 import { FeedService } from 'src/app/services/feed/feed.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { faSolidSpinner } from '@ng-icons/font-awesome/solid'
 import { Thread } from 'src/app/models/threads-content.model';
+import { heroEllipsisHorizontalMini } from '@ng-icons/heroicons/mini';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [CommonModule, MatTabsModule, DialogModule, ContentThreadComponent, NgIconComponent],
-  viewProviders: [provideIcons({ faSolidSpinner })],
+  imports: [CommonModule, MatTabsModule, DialogModule, ContentThreadComponent, NgIconComponent, RouterLink],
+  viewProviders: [provideIcons({ faSolidSpinner, heroEllipsisHorizontalMini })],
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
@@ -42,23 +43,6 @@ export class ProfileComponent {
   threads: Thread[] = []
   replies: Thread[] = []
 
-  contentMock = {
-    "_id": "6602ffddcfcc5ab028cf6b15",
-    "text": "La candidata de la unidad venezolana, Corina Yoris, enfatizó que no han podido acceder al sistema de postulaciones y tampoco han podido llevar la solicitud de prórroga porque los accesos al Consejo Nacional Electoral (CNE), en el centro de Caracas, están cerrados este 25 de marzo.",
-    "user": {
-        "_id": "65efa438ac87507d554d0af4",
-        "name": "Alex Fernandez",
-        "email": "ferxxo@mail.com",
-        "userName": "ferxxo",
-        "__v": 0
-    },
-    "likes": 3,
-    "parent": null,
-    "createdAt": "2024-03-26T17:03:25.826Z",
-    "updatedAt": "2024-03-26T17:03:25.826Z",
-    "__v": 0
-}
-
   constructor(public dialog: Dialog){
     this.userName = this.route.snapshot.paramMap.get('id')
     effect(() =>{
@@ -77,6 +61,7 @@ export class ProfileComponent {
       // see also
       this.otherUserFlag = true
       if(val instanceof NavigationEnd){
+
         this.userName = this.route.snapshot.paramMap.get('id')
         if(this.userName){
           if(this.userName !== this.userSession()?.userName){
@@ -161,5 +146,36 @@ export class ProfileComponent {
         console.log(error)
       }
     })
+  }
+
+  timeSince(date : any){
+    var seconds = Math.floor((new Date().valueOf() - new Date(date).valueOf()) / 1000);
+
+    var interval = seconds / 31536000;
+
+    if (interval > 1) {
+      return Math.floor(interval) + " years";
+    }
+    interval = seconds / 2592000;
+    if (interval > 1) {
+      return Math.floor(interval) + " months";
+    }
+    interval = seconds / 86400;
+    if (interval > 1) {
+      return Math.floor(interval) + " days";
+    }
+    interval = seconds / 3600;
+    if (interval > 1) {
+      return Math.floor(interval) + " hours";
+    }
+    interval = seconds / 60;
+    if (interval > 1) {
+      return Math.floor(interval) + " minutes";
+    }
+    return Math.floor(seconds) + " seconds";
+  }
+
+  getUserParent(id: string){
+
   }
 }

@@ -1,7 +1,7 @@
 import { Component, HostBinding, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CreateThreadComponent } from 'src/app/components/create-thread/create-thread.component';
-import { RouterOutlet } from '@angular/router';
+import { RouterLink, RouterOutlet } from '@angular/router';
 import { NavbarComponent } from 'src/app/components/navbar/navbar.component';
 import { BurgerMenuComponent } from 'src/app/components/navbar/burger-menu/burger-menu.component';
 import { AppServiceService } from 'src/app/services/app/app-service.service';
@@ -13,7 +13,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, CreateThreadComponent, RouterOutlet, NavbarComponent, BurgerMenuComponent],
+  imports: [CommonModule, CreateThreadComponent, RouterOutlet, NavbarComponent, BurgerMenuComponent, RouterLink],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
