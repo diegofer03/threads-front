@@ -4,18 +4,33 @@ import { Thread } from 'src/app/models/threads-content.model';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { heroEllipsisHorizontalMini } from '@ng-icons/heroicons/mini'
 import { RouterLink } from '@angular/router';
+import {Dialog, DialogModule} from '@angular/cdk/dialog';
+import { ContentReplyComponent } from '../content-reply/content-reply.component';
+import { faComment, faHeart } from '@ng-icons/font-awesome/regular'
+import { heroHeart } from '@ng-icons/heroicons/outline'
 
 @Component({
   selector: 'content-thread',
   standalone: true,
-  imports: [CommonModule, NgIconComponent, RouterLink],
+  imports: [CommonModule, NgIconComponent, RouterLink, DialogModule],
   templateUrl: './content-thread.component.html',
-  viewProviders: [provideIcons({ heroEllipsisHorizontalMini })],
+  viewProviders: [provideIcons({ heroEllipsisHorizontalMini, faComment, faHeart })],
   styleUrls: ['./content-thread.component.scss']
 })
 export class ContentThreadComponent {
   @Input() thread? : Thread
 
+  constructor(public dialog: Dialog){}
+
+  openReplyDialog() {
+    this.dialog.open(ContentReplyComponent, {
+      maxWidth: '650px',
+
+      data: {
+        thread: this.thread,
+      },
+    });
+  }
 
   timeSince(date : any){
     var seconds = Math.floor((new Date().valueOf() - new Date(date).valueOf()) / 1000);

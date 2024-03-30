@@ -1,10 +1,10 @@
 <nav class="dark:text-[#4d4d4d] text-[#b8b8b8] w-full text-xl font-bold">
   <div class="flex justify-between">
-    <a routerLink="/home" class="w-20 h-16 flex justify-center mx-[2px] my-1
+    <a routerLink="/home" [routerLinkActive]="['dark:text-white', 'text-black']"  class="w-20 h-16 flex justify-center mx-[2px] my-1
     items-center transition ease-in-out delay-350 duration-400 rounded
     dark:hover:bg-stone-900 hover:bg-gray-100"><ng-icon class="text-3xl" name="heroHomeMini"/></a>
 
-    <a routerLink="/search" class="w-24 h-16 flex justify-center mx-[2px] my-1
+    <a routerLink="/search" [routerLinkActive]="['dark:text-white', 'text-black']" class="w-24 h-16 flex justify-center mx-[2px] my-1
     items-center transition ease-in-out delay-350 duration-400 rounded
     dark:hover:bg-stone-900 hover:bg-gray-100"><ng-icon class="text-3xl" name="heroMagnifyingGlass"/></a>
 
@@ -12,11 +12,11 @@
     items-center transition ease-in-out delay-350 duration-400 rounded
     dark:hover:bg-stone-900 hover:bg-gray-100"><ng-icon class="text-3xl" name="heroPencilSquare"/></a>
 
-    <a class="w-24 h-16 flex justify-center mx-[2px] my-1
+    <a [routerLinkActive]="['dark:text-white', 'text-black']" class="w-24 h-16 flex justify-center mx-[2px] my-1
     items-center transition ease-in-out delay-350 duration-400 rounded
     dark:hover:bg-stone-900 hover:bg-gray-100"><ng-icon class="text-3xl" name="heroHeart"/></a>
 
-    <a [routerLink]="['/profile', user()?.userName]" class="w-24 h-16 flex justify-center mx-[2px] my-1
+    <a [routerLink]="['/profile', user()?.userName]" [routerLinkActive]="['dark:text-white', 'text-black']" class="w-24 h-16 flex justify-center mx-[2px] my-1
     items-center transition ease-in-out delay-350 duration-400 rounded
     dark:hover:bg-stone-900 hover:bg-gray-100"><ng-icon class="text-3xl" name="heroUser"/></a>
   </div>
