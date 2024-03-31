@@ -1,12 +1,12 @@
 <div>
   <div class="grid grid-cols-[1fr_9fr] grid-rows-1 py-5 md:py-4 dark:text-white ">
-    <div>
+    <div class="cursor-pointer" [routerLink]="['/post']">
       <a [routerLink]="['/profile', thread?.user?.userName]">
         <img class="rounded-full w-9 h-9" [src]="'https://ui-avatars.com/api/?name='+thread?.user?.name" alt="avatar">
       </a>
     </div>
     <div class="md:w-full sm:w-[91%] pl-4 sm:pl-0">
-      <div class="flex justify-between">
+      <div class="flex justify-between cursor-pointer" [routerLink]="['/post']">
         <a [routerLink]="['/profile', thread?.user?.userName]" class="hover:underline text-base font-medium">{{thread?.user?.userName}}</a>
 
         <div class="flex items-center">
@@ -14,15 +14,15 @@
           <ng-icon class="ml-4" name="heroEllipsisHorizontalMini"/>
         </div>
       </div>
-      <span class="font-light align-middle">
+      <span class="font-light align-middle cursor-pointer" [routerLink]="['/post']">
         {{thread?.text}}
       </span>
       <div class="flex text-2xl pt-2">
         <div class="dark:hover:bg-stone-700 p-1 flex justify-center items-center hover:rounded-full">
           <ng-icon class="hover:cursor-pointer" name="faHeart"/>
         </div>
-        <div class="dark:hover:bg-stone-700 p-1 flex justify-center items-center hover:rounded-full ml-3">
-          <ng-icon (click)="openReplyDialog()" class=" hover:cursor-pointer  dark:hover:bg-stone-700" name="faComment"/>
+        <div class="dark:hover:bg-stone-700 p-1 flex justify-center items-center hover:bg-stone-200 hover:rounded-full ml-3">
+          <ng-icon (click)="openReplyDialog()" class=" hover:cursor-pointer  dark:hover:bg-stone-700 hover:bg-gray-100" name="faComment"/>
         </div>
       </div>
     </div>

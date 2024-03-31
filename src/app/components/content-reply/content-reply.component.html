@@ -3,7 +3,7 @@
   md:w-[650px] md:h-auto flex flex-col justify-between
   w-screen h-screen">
     <div class="h-full">
-      <div class="grid grid-cols-[1fr_9fr] grid-rows-1 py-5 md:py-4 dark:text-white ">
+      <div class="grid grid-cols-[1fr_9fr] grid-rows-1 py-5 md:py-4 dark:text-white text-black">
         <div>
           <a [routerLink]="['/profile', thread.user.userName]">
             <img class="rounded-full w-9 h-9" [src]="'https://ui-avatars.com/api/?name='+thread.user.name" alt="avatar">
@@ -11,7 +11,7 @@
         </div>
         <div class="md:w-full sm:w-[91%] pl-4 sm:pl-0">
           <div class="flex justify-between">
-            <a [routerLink]="['/profile', thread.user.userName]" class="hover:underline">{{thread.user.userName}}</a>
+            <a [routerLink]="['/profile', thread.user.userName]" class="hover:underline font-medium">{{thread.user.userName}}</a>
 
             <div class="flex items-center">
               <span class="dark:text-stone-500 text-[#b8b8b8]">{{timeSince(thread.createdAt)}}</span>
