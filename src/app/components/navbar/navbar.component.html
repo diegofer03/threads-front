@@ -1,5 +1,10 @@
 <nav class="dark:text-[#4d4d4d] text-[#b8b8b8] w-full text-xl font-bold">
   <div class="flex justify-between">
+    <a routerLink="/post" (click)="return()" routerLinkActive #rla="routerLinkActive" [ngClass]="rla.isActive ? 'flex' : 'hidden'"
+    class="w-20 h-16 justify-center mx-[2px] my-1
+    items-center transition ease-in-out delay-350 duration-400 rounded
+    dark:hover:bg-stone-900 hover:bg-gray-100"><ng-icon class="text-3xl" name="heroArrowLeftSolid"/></a>
+
     <a routerLink="/home" [routerLinkActive]="['dark:text-white', 'text-black']"  class="w-20 h-16 flex justify-center mx-[2px] my-1
     items-center transition ease-in-out delay-350 duration-400 rounded
     dark:hover:bg-stone-900 hover:bg-gray-100"><ng-icon class="text-3xl" name="heroHomeMini"/></a>
