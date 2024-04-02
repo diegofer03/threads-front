@@ -28,9 +28,14 @@ export class AuthComponent {
   loading = false
 
   loginForm = this.formBuilder.nonNullable.group({
-    user: ['', [ Validators.required]],
-    password: ['', [ Validators.required, Validators.minLength(6)]],
+    user: ['alex@mail.com', [ ]],
+    password: ['12345678', [ ]],
   });
+
+  constructor(){
+    this.loginForm.controls['user'].disable();
+    this.loginForm.controls['password'].disable();
+  }
 
   login(){
     const { user, password } = this.loginForm.getRawValue()
@@ -40,7 +45,7 @@ export class AuthComponent {
     if(!password) this.toastr.error(undefined, 'Enter your password.', {
         "positionClass": "toast-bottom-center",
       });
-    if(this.loginForm.valid){
+    // if(this.loginForm.valid){
       this.loading = true
       this.authService.login(user, password).subscribe({
         next: (data) => {
@@ -54,8 +59,7 @@ export class AuthComponent {
           });
         }
       })
-    }
-
+    // }
     //Sorry, your password was incorrect. Please double-check your password.
   }
 }

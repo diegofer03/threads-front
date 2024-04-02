@@ -1,1 +1,19 @@
-<p>thread works!</p>
+<div class=" flex flex-col items-center">
+  <div class="w-screen md:w-[620px] px-6">
+    <div *ngIf="!loading">
+      <content-thread [thread]="mainThread"/>
+      <hr class="dark:bg-[#4d4d4d] bg-[#b8b8b8]  border-none h-[1px]">
+      <content-thread *ngFor="let thread of threads" [thread]="thread"/>
+    </div>
+    <div *ngIf="loading">
+      <div class="w-full flex py-4" *ngFor="let skeleton of skeleton_times">
+        <ngx-skeleton-loader [theme]="{ background: '#b5b5b5'}" appearance="circle"/>
+        <div class="flex flex-col w-[90%]">
+          <ngx-skeleton-loader [theme]="{ width: '25%', background: '#b5b5b5'}"/>
+          <ngx-skeleton-loader [theme]="{ background: '#b5b5b5'}"/>
+          <ngx-skeleton-loader [theme]="{ width: '30%', background: '#b5b5b5'}"/>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

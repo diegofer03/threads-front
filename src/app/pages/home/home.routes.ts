@@ -17,7 +17,7 @@ export default [
     title: 'Search • Threads'
   },
   {
-    path: 'post',
+    path: 'post/:id',
     loadComponent: () => import ('./thread/thread.component').then(t => t.ThreadComponent),
     title: 'post'
   }
