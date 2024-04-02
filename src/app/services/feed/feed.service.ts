@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { api } from 'src/app/config/api';
 import { Thread, createThread } from 'src/app/models/threads-content.model';
@@ -35,5 +35,14 @@ export class FeedService {
 
   getRepliesByUserId(id: string){
     return this.http.get<Thread[]>(`${this.api}comments/getRepliesByUserId/${id}`)
+  }
+
+  getThreadById(id: string){
+    return this.http.get<Thread>(`${api.api}comments/${id}`)
+  }
+
+  getByParentId(id: string){
+    const params = new HttpParams().set('parentId', id)
+    return this.http.get<Thread[]>(`${this.api}comments`,{ params })
   }
 }
