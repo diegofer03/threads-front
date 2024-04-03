@@ -25,6 +25,7 @@
     "@ng-icons/font-awesome": "^27.2.0",
     "@ng-icons/heroicons": "^27.2.0",
     "jwt-decode": "^4.0.0",
+    "karma-mocha-reporter": "^2.2.5",
     "ngx-cookie-service": "^16.1.0",
     "ngx-skeleton-loader": "^6.0.0",
     "ngx-toastr": "^18.0.0",
