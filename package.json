@@ -24,6 +24,7 @@
     "@ng-icons/css.gg": "^27.2.0",
     "@ng-icons/font-awesome": "^27.2.0",
     "@ng-icons/heroicons": "^27.2.0",
+    "jasmine-reporters": "^2.5.2",
     "jwt-decode": "^4.0.0",
     "karma-mocha-reporter": "^2.2.5",
     "ngx-cookie-service": "^16.1.0",
