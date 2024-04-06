@@ -6,6 +6,8 @@ import { AppServiceService } from 'src/app/services/app/app-service.service';
 import { FeedService } from 'src/app/services/feed/feed.service';
 import { TextareaAutoresizeDirective } from 'src/app/directives/textarea-autoresize/textarea-autoresize.directive';
 import { FormsModule } from '@angular/forms';
+import { DIALOG_DATA, DialogRef} from '@angular/cdk/dialog';
+import { RouterModule } from '@angular/router';
 
 fdescribe('ContentReplyComponent', () => {
   let component: ContentReplyComponent;
@@ -20,12 +22,30 @@ fdescribe('ContentReplyComponent', () => {
     const spyFeedService = jasmine.createSpyObj<FeedService>('FeedService', ['createThread'])
 
     TestBed.configureTestingModule({
-      declarations: [TextareaAutoresizeDirective],
-      imports: [ContentReplyComponent, FormsModule],
+      declarations: [],
+      imports: [ContentReplyComponent, FormsModule, RouterModule.forRoot([])],
       providers: [
         {provide: SessionService, useValue: spySessionService},
         {provide: AppServiceService, useValue: spyAppService},
-        {provide: FeedService, useValue: spyFeedService}
+        {provide: FeedService, useValue: spyFeedService},
+        { provide: DialogRef, useValue: {} },
+        { provide: DIALOG_DATA,  useValue: {
+            thread: {
+              _id: '1234',
+              text: 'test unit',
+              user: {
+                _id: '123',
+                name: 'reply',
+                email: 'reply@mail.com',
+                userName: 'reply99',
+              },
+              parent: '123456',
+              createdAt: '04-02-2024',
+              updatedAt: '04-02-2024',
+              likes: 2
+            }
+          }
+        }
       ]
     }).compileComponents();
     fixture = TestBed.createComponent(ContentReplyComponent);
