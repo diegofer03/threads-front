@@ -8,6 +8,9 @@ import { TextareaAutoresizeDirective } from 'src/app/directives/textarea-autores
 import { FormsModule } from '@angular/forms';
 import { DIALOG_DATA, DialogRef} from '@angular/cdk/dialog';
 import { RouterModule } from '@angular/router';
+import { DebugElement } from '@angular/core';
+import { By } from '@angular/platform-browser';
+import { HtmlParser } from '@angular/compiler';
 
 fdescribe('ContentReplyComponent', () => {
   let component: ContentReplyComponent;
@@ -15,6 +18,23 @@ fdescribe('ContentReplyComponent', () => {
   let sessionService: jasmine.SpyObj<SessionService>
   let appService : jasmine.SpyObj<AppServiceService>
   let feedService : jasmine.SpyObj<FeedService>
+
+  const mockThread = {
+    thread: {
+      _id: '1234',
+      text: 'test unit',
+      user: {
+        _id: '123',
+        name: 'reply',
+        email: 'reply@mail.com',
+        userName: 'reply99',
+      },
+      parent: '123456',
+      createdAt: '04-02-2024',
+      updatedAt: '04-02-2024',
+      likes: 2
+    }
+  }
 
   beforeEach(() => {
     const spySessionService = jasmine.createSpyObj<SessionService>('SessionService', ['user'])
@@ -29,23 +49,7 @@ fdescribe('ContentReplyComponent', () => {
         {provide: AppServiceService, useValue: spyAppService},
         {provide: FeedService, useValue: spyFeedService},
         { provide: DialogRef, useValue: {} },
-        { provide: DIALOG_DATA,  useValue: {
-            thread: {
-              _id: '1234',
-              text: 'test unit',
-              user: {
-                _id: '123',
-                name: 'reply',
-                email: 'reply@mail.com',
-                userName: 'reply99',
-              },
-              parent: '123456',
-              createdAt: '04-02-2024',
-              updatedAt: '04-02-2024',
-              likes: 2
-            }
-          }
-        }
+        { provide: DIALOG_DATA,  useValue: mockThread }
       ]
     }).compileComponents();
     fixture = TestBed.createComponent(ContentReplyComponent);
@@ -65,4 +69,12 @@ fdescribe('ContentReplyComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should render tweet thread', () => {
+    const threadElement: HTMLElement = fixture.debugElement.query(By.css('#thread_text')).nativeElement
+    const threadUser: HTMLElement = fixture.debugElement.query(By.css('#thread_username')).nativeElement
+
+    expect(threadElement.textContent).toContain(mockThread.thread.text)
+    expect(threadUser.textContent).toContain(mockThread.thread.user.userName)
+  })
 });
