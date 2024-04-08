@@ -77,4 +77,12 @@ fdescribe('ContentReplyComponent', () => {
     expect(threadElement.textContent).toContain(mockThread.thread.text)
     expect(threadUser.textContent).toContain(mockThread.thread.user.userName)
   })
+
+  it('should threadContent field be required', () => {
+    component.threadContent.setValue('')
+    expect(component.threadContent.invalid).toBeTruthy()
+
+    component.threadContent.setValue('test thread')
+    expect(component.threadContent.valid).toBeTruthy()
+  })
 });
