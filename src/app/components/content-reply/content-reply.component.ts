@@ -40,9 +40,9 @@ export class ContentReplyComponent {
   ])
 
   replyThread(){
+    console.log(this.user)
     if(this.threadContent.valid){
       this.loading = true
-      console.log(this.threadContent.value)
       const payload = {
         parentId: this.thread._id,
         userId: this.user!._id,

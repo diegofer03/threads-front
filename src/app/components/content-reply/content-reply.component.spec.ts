@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 
 import { ContentReplyComponent } from './content-reply.component';
 import { SessionService } from 'src/app/services/session/session.service';
@@ -11,6 +11,7 @@ import { RouterModule } from '@angular/router';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { HtmlParser } from '@angular/compiler';
+import { defer } from 'rxjs';
 
 fdescribe('ContentReplyComponent', () => {
   let component: ContentReplyComponent;
@@ -58,7 +59,8 @@ fdescribe('ContentReplyComponent', () => {
     appService = TestBed.inject(AppServiceService) as jasmine.SpyObj<AppServiceService>
     feedService = TestBed.inject(FeedService) as jasmine.SpyObj<FeedService>
 
-    sessionService.user.and.returnValue({_id: '1234',
+    sessionService.user.and.returnValue({
+      _id: '1234',
       name: 'alex',
       email: 'alex@mail.com',
       userName: 'alex22',})
@@ -85,4 +87,16 @@ fdescribe('ContentReplyComponent', () => {
     component.threadContent.setValue('test thread')
     expect(component.threadContent.valid).toBeTruthy()
   })
+
+  it('should complete succesfully request', fakeAsync(() => {
+    component.threadContent.setValue('test thread comment')
+    feedService.createThread.and.returnValue(defer(() => Promise.resolve({})))
+    component.replyThread()
+    fixture.detectChanges()
+    expect(component.threadContent.valid).toBeTruthy()
+    expect(component.loading).toBeTruthy()
+    tick()
+    expect(feedService.createThread).toHaveBeenCalled()
+    expect(component.loading).toBeFalsy()
+  }))
 });
