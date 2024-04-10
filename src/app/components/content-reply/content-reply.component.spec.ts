@@ -11,7 +11,7 @@ import { RouterModule } from '@angular/router';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { HtmlParser } from '@angular/compiler';
-import { defer } from 'rxjs';
+import { defer, of } from 'rxjs';
 
 fdescribe('ContentReplyComponent', () => {
   let component: ContentReplyComponent;
@@ -63,8 +63,14 @@ fdescribe('ContentReplyComponent', () => {
       _id: '1234',
       name: 'alex',
       email: 'alex@mail.com',
-      userName: 'alex22',})
-
+      userName: 'alex22',
+    })
+    component.user = {
+      _id: '1234',
+      name: 'alex',
+      email: 'alex@mail.com',
+      userName: 'alex22',
+    }
     fixture.detectChanges();
   });
 

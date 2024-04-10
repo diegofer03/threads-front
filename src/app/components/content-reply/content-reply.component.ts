@@ -40,7 +40,6 @@ export class ContentReplyComponent {
   ])
 
   replyThread(){
-    console.log(this.user)
     if(this.threadContent.valid){
       this.loading = true
       const payload = {
