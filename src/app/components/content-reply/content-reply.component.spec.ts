@@ -105,4 +105,8 @@ fdescribe('ContentReplyComponent', () => {
     expect(feedService.createThread).toHaveBeenCalled()
     expect(component.loading).toBeFalsy()
   }))
+
+  it('should submit request from ui', () => {
+    
+  })
 });
