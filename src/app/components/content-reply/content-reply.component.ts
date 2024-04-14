@@ -1,5 +1,5 @@
 import { Component, Inject, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { SessionService } from 'src/app/services/session/session.service';
 import { AppServiceService } from 'src/app/services/app/app-service.service';
 import { FeedService } from 'src/app/services/feed/feed.service';
@@ -25,6 +25,7 @@ export class ContentReplyComponent {
   private sessionService = inject(SessionService)
   private appService = inject(AppServiceService)
   private feedService = inject(FeedService)
+  private location = inject(Location)
 
   darkMode = this.appService.darkMode
   loading = false
@@ -50,7 +51,7 @@ export class ContentReplyComponent {
       this.feedService.createThread(payload).subscribe({
         next: (data) => {
           this.loading = false
-          window.location.reload();
+          this.location.historyGo(0);
         },
         error: (error) => {
           this.loading = false
