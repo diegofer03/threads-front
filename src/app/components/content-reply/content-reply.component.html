@@ -32,8 +32,9 @@
         </div>
         <div class="flex flex-col w-full pl-6 md:pl-0">
           <span class="dark:text-white text-black font-medium">{{user?.userName}}</span>
-          <textarea appTextareaAutoresize id="thread_content" class="resize-none dark:text-white text-black pt-1 border-none h-fit font-light bg-transparent outline-none"
-          type="text" maxlength="300" [placeholder]="'Reply to '+thread.user.userName+'...'" [formControl]="threadContent"></textarea>
+          <textarea appTextareaAutoresize id="thread_content" class="resize-none dark:text-white text-black pt-1 border-none h-fit font-light
+            bg-transparent outline-none"
+            type="text" maxlength="300" [placeholder]="'Reply to '+thread.user.userName+'...'" [formControl]="threadContent"></textarea>
         </div>
       </div>
     </div>

@@ -109,14 +109,15 @@ fdescribe('ContentReplyComponent', () => {
   it('should submit request from ui', fakeAsync(() => {
     const threadcontent: HTMLTextAreaElement = fixture.debugElement.query(By.css('#thread_content')).nativeElement
     threadcontent.value = 'test thread comment'
+    component.threadContent.setValue('test thread comment')
     feedService.createThread.and.returnValue(defer(() => Promise.resolve({})))
     const threadCrtButton = fixture.debugElement.query(By.css('#createBtn'))
     threadCrtButton.triggerEventHandler('click', null)
     fixture.detectChanges()
     expect(component.threadContent.valid).toBeTruthy()
-    // expect(component.loading).toBeTruthy()
+    expect(component.loading).toBeTruthy()
     tick()
-    // expect(feedService.createThread).toHaveBeenCalled()
-    // expect(component.loading).toBeFalsy()
+    expect(feedService.createThread).toHaveBeenCalled()
+    expect(component.loading).toBeFalsy()
   }))
 });
