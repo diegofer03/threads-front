@@ -13,7 +13,7 @@ import { By } from '@angular/platform-browser';
 import { HtmlParser } from '@angular/compiler';
 import { defer, of } from 'rxjs';
 
-fdescribe('ContentReplyComponent', () => {
+describe('ContentReplyComponent', () => {
   let component: ContentReplyComponent;
   let fixture: ComponentFixture<ContentReplyComponent>;
   let sessionService: jasmine.SpyObj<SessionService>
