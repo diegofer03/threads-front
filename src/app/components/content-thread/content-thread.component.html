@@ -14,7 +14,7 @@
           <ng-icon class="ml-4" name="heroEllipsisHorizontalMini"/>
         </div>
       </div>
-      <span class="font-light align-middle cursor-pointer" [routerLink]="['/post', thread?._id]">
+      <span id="thread_text" class="font-light align-middle cursor-pointer" [routerLink]="['/post', thread?._id]">
         {{thread?.text}}
       </span>
       <div class="flex text-2xl pt-2">
