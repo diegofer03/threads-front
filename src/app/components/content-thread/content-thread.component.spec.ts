@@ -22,6 +22,27 @@ fdescribe('ContentThreadComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should render thread component', () => {
+    component.thread = {
+      _id: '1234',
+      text: 'test unit',
+      user: {
+        _id: '123',
+        name: 'reply',
+        email: 'reply@mail.com',
+        userName: 'reply99',
+      },
+      createdAt: '04-02-2024',
+      updatedAt: '04-02-2024',
+      likes: 2
+    }
+    fixture.detectChanges()
+
+    const threadContent: HTMLElement = fixture.debugElement.query(By.css('#thread_text')).nativeElement
+    const text = threadContent.textContent!
+    expect(text).toContain(component.thread.text)
+  })
 });
 
 @Component({
@@ -50,7 +71,8 @@ fdescribe('HostComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [HostComponent, ContentThreadComponent]
+      declarations: [HostComponent],
+      imports: [ContentThreadComponent, RouterModule.forRoot([])]
     }).compileComponents()
 
     fixture = TestBed.createComponent(HostComponent)

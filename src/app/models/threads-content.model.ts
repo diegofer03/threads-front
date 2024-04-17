@@ -5,7 +5,7 @@ export interface Thread {
   _id: string,
   text: string,
   user: User,
-  parent: Thread,
+  parent?: Thread,
   createdAt: string,
   updatedAt: string,
   likes: number
