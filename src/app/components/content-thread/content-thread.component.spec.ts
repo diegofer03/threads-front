@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
 import { Component } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
-fdescribe('ContentThreadComponent', () => {
+describe('ContentThreadComponent', () => {
   let component: ContentThreadComponent;
   let fixture: ComponentFixture<ContentThreadComponent>;
 
@@ -65,7 +65,7 @@ class HostComponent{
   }
 }
 
-fdescribe('HostComponent', () => {
+describe('HostComponent', () => {
   let component: HostComponent
   let fixture: ComponentFixture<HostComponent>
 
