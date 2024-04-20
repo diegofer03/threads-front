@@ -1,10 +1,11 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 
 import { DialogComponent } from './dialog.component';
 import { SessionService } from 'src/app/services/session/session.service';
 import { AppServiceService } from 'src/app/services/app/app-service.service';
 import { FeedService } from 'src/app/services/feed/feed.service';
 import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
+import { defer } from 'rxjs';
 
 fdescribe('DialogComponent', () => {
   let component: DialogComponent;
@@ -52,4 +53,18 @@ fdescribe('DialogComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should made request and create thread', fakeAsync(() => {
+    component.threadContent.setValue('test create thread')
+    feedService.createThread.and.returnValue(defer(() => Promise.resolve({})))
+    expect(component.threadContent.valid).toBeTruthy()
+    component.createThread()
+    fixture.detectChanges()
+    expect(component.loading).toBeTruthy()
+    tick()
+    expect(feedService.createThread).toHaveBeenCalledWith({
+      userId: component.user!._id,
+      text: component.threadContent.value!
+    })
+  }))
 });
