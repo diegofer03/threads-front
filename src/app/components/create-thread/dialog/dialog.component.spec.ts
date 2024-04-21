@@ -7,7 +7,7 @@ import { FeedService } from 'src/app/services/feed/feed.service';
 import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
 import { defer } from 'rxjs';
 
-fdescribe('DialogComponent', () => {
+describe('DialogComponent', () => {
   let component: DialogComponent;
   let fixture: ComponentFixture<DialogComponent>;
   let sessionService: jasmine.SpyObj<SessionService>
