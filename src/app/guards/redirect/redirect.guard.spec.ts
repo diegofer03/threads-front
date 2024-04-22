@@ -3,8 +3,8 @@ import { CanActivateFn } from '@angular/router';
 
 import { redirectGuard } from './redirect.guard';
 
-describe('redirectGuard', () => {
-  const executeGuard: CanActivateFn = (...guardParameters) => 
+fdescribe('redirectGuard', () => {
+  const executeGuard: CanActivateFn = (...guardParameters) =>
       TestBed.runInInjectionContext(() => redirectGuard(...guardParameters));
 
   beforeEach(() => {
