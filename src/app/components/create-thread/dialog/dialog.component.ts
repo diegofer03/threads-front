@@ -1,5 +1,5 @@
 import { Component, Inject, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { DIALOG_DATA, DialogRef} from '@angular/cdk/dialog';
 import {MatButtonModule} from '@angular/material/button';
 import { AppServiceService } from 'src/app/services/app/app-service.service';
@@ -23,6 +23,7 @@ export class DialogComponent {
   private appService = inject(AppServiceService)
   private feedService = inject(FeedService)
   private sessionService = inject(SessionService)
+  private location = inject(Location)
 
   darkMode = this.appService.darkMode
   loading = false
@@ -41,7 +42,6 @@ export class DialogComponent {
   createThread(){
     if(this.threadContent.valid){
       this.loading = true
-      console.log(this.threadContent.value)
       const payload = {
         userId: this.user!._id,
         text: this.threadContent.value!
@@ -49,7 +49,7 @@ export class DialogComponent {
       this.feedService.createThread(payload).subscribe({
         next: (data) => {
           this.loading = false
-          window.location.reload();
+          this.location.historyGo(0)
         },
         error: (error) => {
           this.loading = false
