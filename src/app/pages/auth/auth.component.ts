@@ -33,8 +33,8 @@ export class AuthComponent {
   });
 
   constructor(){
-    this.loginForm.controls['user'].disable();
-    this.loginForm.controls['password'].disable();
+    this.loginForm.controls['user'];
+    this.loginForm.controls['password'];
   }
 
   login(){
