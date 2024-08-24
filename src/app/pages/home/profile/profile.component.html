@@ -26,21 +26,21 @@
               <div *ngFor="let replie of replies">
                 <div class="grid grid-cols-[1fr_9fr] grid-rows-1 py-5 md:py-4 dark:text-white ">
                   <div>
-                    <a [routerLink]="['/profile', replie.parent.user.userName]">
-                      <img class="rounded-full w-9 h-9" [src]="'https://ui-avatars.com/api/?name='+replie.parent.user.name" alt="avatar">
+                    <a [routerLink]="['/profile', replie.parent?.user?.userName]">
+                      <img class="rounded-full w-9 h-9" [src]="'https://ui-avatars.com/api/?name='+replie.parent?.user?.name" alt="avatar">
                     </a>
                   </div>
                   <div class="md:w-full sm:w-[91%] pl-4 sm:pl-0">
                     <div class="flex justify-between">
-                      <a [routerLink]="['/profile', replie.parent.user.userName]" class="hover:underline">{{replie.parent.user.userName}}</a>
+                      <a [routerLink]="['/profile', replie.parent?.user?.userName]" class="hover:underline">{{replie.parent?.user?.userName}}</a>
 
                       <div class="flex items-center">
-                        <span class="dark:text-stone-500 text-[#b8b8b8]">{{timeSince(replie.parent.createdAt)}}</span>
+                        <span class="dark:text-stone-500 text-[#b8b8b8]">{{timeSince(replie.parent?.createdAt)}}</span>
                         <ng-icon class="ml-4" name="heroEllipsisHorizontalMini"/>
                       </div>
                     </div>
                     <span class="font-light align-middle">
-                      {{replie.parent.text}}
+                      {{replie.parent?.text}}
                     </span>
                   </div>
                 </div>
